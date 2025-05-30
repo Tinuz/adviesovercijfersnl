@@ -1,6 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
-
 export default function OverOns() {
   return (
     <div className="bg-background text-textDark min-h-screen flex flex-col">
