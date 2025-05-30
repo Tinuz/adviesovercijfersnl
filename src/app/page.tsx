@@ -1,103 +1,203 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <div className="bg-background text-textDark min-h-screen flex flex-col">
+      {/* Hero Section */}
+      <section
+        className="bg-hero w-full py-16 md:py-24 px-4"
+        id="hero"
+      >
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+          <div className="flex-1">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary leading-tight">
+              Jouw cijfers, onze expertise
+            </h1>
+            <p className="text-lg md:text-xl text-textLight mb-8 max-w-xl">
+              Professioneel advies en ondersteuning voor ondernemers en
+              particulieren. Transparant, betrokken en altijd up-to-date.
+            </p>
+            <a
+              href="#contact"
+              className="inline-block bg-action text-white rounded-btn px-8 py-4 font-semibold shadow hover:bg-primary transition"
+            >
+              Gratis intake
+            </a>
+          </div>
+          <div className="flex-1 flex justify-center">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/logo.png"
+              alt="Illustratie cijfers"
+              width={720}
+              height={540}
+              className="w-full max-w-xs md:max-w-md"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* Diensten */}
+      <section
+        className="py-16 px-4 bg-background"
+        id="diensten"
+      >
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold mb-10 text-primary">
+            Onze diensten
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Dienst 1 */}
+            <div className="bg-white rounded-xl shadow p-6 flex flex-col items-start">
+              <div className="bg-secondary/10 p-3 rounded-full mb-4">
+                <Image
+                  src="/file.svg"
+                  alt="Boekhouding"
+                  width={32}
+                  height={32}
+                />
+              </div>
+              <h3 className="font-semibold text-lg mb-2">Boekhouding</h3>
+              <p className="text-textLight mb-4">
+                Volledige ontzorging van je administratie, van factuur tot
+                jaarrekening.
+              </p>
+              <Link
+                href="/diensten"
+                className="text-action font-medium hover:underline"
+              >
+                Lees meer
+              </Link>
+            </div>
+            {/* Dienst 2 */}
+            <div className="bg-white rounded-xl shadow p-6 flex flex-col items-start">
+              <div className="bg-secondary/10 p-3 rounded-full mb-4">
+                <Image
+                  src="/window.svg"
+                  alt="Jaarrekening"
+                  width={32}
+                  height={32}
+                />
+              </div>
+              <h3 className="font-semibold text-lg mb-2">Jaarrekening</h3>
+              <p className="text-textLight mb-4">
+                Heldere jaarrekeningen en rapportages, altijd conform de laatste
+                wetgeving.
+              </p>
+              <Link
+                href="/diensten"
+                className="text-action font-medium hover:underline"
+              >
+                Lees meer
+              </Link>
+            </div>
+            {/* Dienst 3 */}
+            <div className="bg-white rounded-xl shadow p-6 flex flex-col items-start">
+              <div className="bg-secondary/10 p-3 rounded-full mb-4">
+                <Image
+                  src="/vercel.svg"
+                  alt="Fiscaal advies"
+                  width={32}
+                  height={32}
+                />
+              </div>
+              <h3 className="font-semibold text-lg mb-2">Fiscaal advies</h3>
+              <p className="text-textLight mb-4">
+                Praktisch en actueel fiscaal advies voor ondernemers en
+                particulieren.
+              </p>
+              <Link
+                href="/diensten"
+                className="text-action font-medium hover:underline"
+              >
+                Lees meer
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Waarom wij */}
+      <section className="py-16 px-4" id="over">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 className="text-3xl font-bold mb-6 text-primary">
+              Waarom kiezen voor ons?
+            </h2>
+            <ul className="space-y-4 mb-6">
+              <li className="flex items-start gap-3">
+                <span className="text-action mt-1">✔</span> Persoonlijk en
+                betrokken advies
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-action mt-1">✔</span> Altijd up-to-date
+                kennis
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-action mt-1">✔</span> Transparante tarieven
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-action mt-1">✔</span> Snel en accuraat
+              </li>
+            </ul>
+            <a
+              href="#contact"
+              className="inline-block bg-accent text-white rounded-btn px-8 py-4 font-semibold shadow hover:bg-primary transition"
+            >
+              Neem contact op
+            </a>
+          </div>
+          <div className="flex justify-center">
+            <Image
+              src="/hero.png"
+              alt="USP illustratie"
+              width={320}
+              height={240}
+              className="w-full max-w-xs md:max-w-md"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-16 px-4 bg-background">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold mb-10 text-primary">
+            Wat klanten zeggen
+          </h2>
+          <div className="flex flex-col md:flex-row gap-8 overflow-x-auto">
+            {/* Testimonial 1 */}
+            <div className="bg-white rounded-xl shadow p-6 min-w-[280px] flex-1">
+              <p className="text-lg mb-4">
+                “Zeer professioneel en altijd bereikbaar. Mijn administratie is in
+                goede handen!”
+              </p>
+              <span className="block text-textLight font-medium">
+                - Jan de Vries
+              </span>
+            </div>
+            {/* Testimonial 2 */}
+            <div className="bg-white rounded-xl shadow p-6 min-w-[280px] flex-1">
+              <p className="text-lg mb-4">
+                “Helder advies en snelle service. Aanrader voor iedere ondernemer.”
+              </p>
+              <span className="block text-textLight font-medium">
+                - Fatima Yilmaz
+              </span>
+            </div>
+            {/* Testimonial 3 */}
+            <div className="bg-white rounded-xl shadow p-6 min-w-[280px] flex-1">
+              <p className="text-lg mb-4">
+                “Transparant, duidelijk en altijd up-to-date. Prettige
+                samenwerking!”
+              </p>
+              <span className="block text-textLight font-medium">
+                - Pieter van Leeuwen
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

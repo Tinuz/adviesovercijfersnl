@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --background: #F9F9F9;
+  --foreground: #2C2C2C;
+  --primary: #005B96;
+  --secondary: #00A6D6;
+  --text-dark: #2C2C2C;
+  --text-light: #6C6C6C;
+  --action: #00A86B;
+  --accent: #FFB400;
+  --footer: #003B6F;
+  --hero: #E6F3FA;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +23,43 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', 'Roboto', var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+.bg-background { background-color: var(--background) !important; }
+.bg-primary { background-color: var(--primary) !important; }
+.bg-secondary { background-color: var(--secondary) !important; }
+.bg-action { background-color: var(--action) !important; }
+.bg-accent { background-color: var(--accent) !important; }
+.bg-footer { background-color: var(--footer) !important; }
+.bg-hero { background-color: var(--hero) !important; }
+
+.text-primary { color: var(--primary) !important; }
+.text-secondary { color: var(--secondary) !important; }
+.text-action { color: var(--action) !important; }
+.text-accent { color: var(--accent) !important; }
+.text-footer { color: var(--footer) !important; }
+.text-textDark { color: var(--text-dark) !important; }
+.text-textLight { color: var(--text-light) !important; }
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-slide-in {
+  animation: slide-in 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
 }
