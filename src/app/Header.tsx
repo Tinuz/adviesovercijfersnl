@@ -1,73 +1,84 @@
 "use client";
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Sticky shadow bij scrollen
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Scroll lock bij open mobiel menu
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
   // Sluit menu bij klik buiten menu
   useEffect(() => {
     if (!mobileOpen) return;
-    function handleClick(e: MouseEvent) {
+    function handle(e: MouseEvent) {
       const nav = document.getElementById("mobile-nav");
-      if (nav && !nav.contains(e.target as Node)) {
-        setMobileOpen(false);
-      }
+      if (nav && !nav.contains(e.target as Node)) setMobileOpen(false);
     }
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
+    document.addEventListener("mousedown", handle);
+    return () => document.removeEventListener("mousedown", handle);
   }, [mobileOpen]);
 
   return (
-    <header className="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-gray-200 pt-safe pb-0">
+    <header className={`sticky top-0 z-50 bg-white transition-all ${scrolled ? "shadow-md" : "shadow-none"}`} style={{fontFamily: 'Inter, Manrope, sans-serif'}}>
       <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-4 lg:px-8">
-        <div className="flex items-center gap-2">
-          <Image src="/logo.png" alt="Logo" width={36} height={36} />
-          <span className="font-bold text-xl tracking-tight text-primary">Advies Over Cijfers</span>
-        </div>
-        <nav className="hidden md:flex gap-8 items-center text-base font-medium">
-          <Link href="/" className="hover:text-primary transition">Home</Link>
-          <Link href="/diensten" className="hover:text-primary transition">Diensten</Link>
-          <Link href="/over" className="hover:text-primary transition">Over Ons</Link>
-          <Link href="/contact" className="hover:text-primary transition">Contact</Link>
+        {/* Logo & naam */}
+        <Link href="/" className="flex items-center gap-2 group">
+          <Image src="/logo.png" alt="Logo" width={32} height={32} />
+          <span className="font-bold text-2xl tracking-tight text-[#005B96] group-hover:text-blue-700 transition-all">Advies Over Cijfers</span>
+        </Link>
+        {/* Desktop nav */}
+        <nav className="hidden md:flex items-center gap-2 lg:gap-6 text-base font-semibold">
+          <Link href="/" className="px-4 py-2 rounded text-[#005B96] hover:text-blue-700 transition-all">Home</Link>
+          <Link href="/diensten" className="px-4 py-2 rounded text-[#005B96] hover:text-blue-700 transition-all">Diensten</Link>
+          <Link href="/over" className="px-4 py-2 rounded text-[#005B96] hover:text-blue-700 transition-all">Over ons</Link>
+          <a href="#contact" className="ml-4 px-6 py-2 rounded bg-[#00A86B] text-white font-semibold shadow hover:bg-[#008e59] transition-all focus:outline-none focus:ring-2 focus:ring-[#00A86B] focus:ring-offset-2">Gratis intake</a>
         </nav>
-        <Link href="/contact" className="hidden md:inline-block bg-action text-white rounded-btn px-6 py-3 font-semibold shadow hover:bg-primary transition">Gratis intake</Link>
         {/* Hamburger */}
-        <button type="button" className="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-primary" aria-label="Open menu" onClick={() => setMobileOpen(v => !v)}>
-          <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+        <button
+          type="button"
+          className="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-[#005B96]"
+          aria-label="Open menu"
+          onClick={() => setMobileOpen(true)}
+        >
+          <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#005B96"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
       </div>
-      {/* Mobile menu */}
+      {/* Mobile overlay menu */}
       {mobileOpen && (
-        <nav
-          id="mobile-nav"
-          className="md:hidden bg-white border-t border-gray-200 px-4 pb-8 pt-4 flex flex-col gap-3 shadow-lg animate-slide-in fixed inset-x-0 top-[64px] z-40 min-h-[calc(100vh-64px)]"
-          style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
-        >
-          <Link href="/" className="py-3 px-2 rounded hover:bg-primary/10 transition text-lg" onClick={() => setMobileOpen(false)}>Home</Link>
-          <Link href="/diensten" className="py-3 px-2 rounded hover:bg-primary/10 transition text-lg" onClick={() => setMobileOpen(false)}>Diensten</Link>
-          <Link href="/over" className="py-3 px-2 rounded hover:bg-primary/10 transition text-lg" onClick={() => setMobileOpen(false)}>Over Ons</Link>
-          <Link href="/contact" className="py-3 px-2 rounded hover:bg-primary/10 transition text-lg" onClick={() => setMobileOpen(false)}>Contact</Link>
-          <Link href="/contact" className="w-full bg-action text-white rounded-btn px-6 py-4 font-semibold shadow hover:bg-primary transition text-center mt-4 text-lg" onClick={() => setMobileOpen(false)}>Gratis intake</Link>
-        </nav>
+        <div className="fixed inset-0 z-50 bg-white/95 flex flex-col items-center justify-center animate-fade-in">
+          <button
+            type="button"
+            className="absolute top-6 right-6 p-2 rounded focus:outline-none focus:ring-2 focus:ring-[#005B96]"
+            aria-label="Sluit menu"
+            onClick={() => setMobileOpen(false)}
+          >
+            <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#005B96"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+          <nav id="mobile-nav" className="flex flex-col items-center gap-8 text-2xl font-semibold">
+            <Link href="/" className="px-6 py-2 rounded text-[#005B96] hover:text-blue-700 transition-all" onClick={() => setMobileOpen(false)}>Home</Link>
+            <Link href="/diensten" className="px-6 py-2 rounded text-[#005B96] hover:text-blue-700 transition-all" onClick={() => setMobileOpen(false)}>Diensten</Link>
+            <Link href="/over" className="px-6 py-2 rounded text-[#005B96] hover:text-blue-700 transition-all" onClick={() => setMobileOpen(false)}>Over ons</Link>
+            <a href="#contact" className="mt-6 px-8 py-3 rounded bg-[#00A86B] text-white font-semibold shadow hover:bg-[#008e59] transition-all text-xl" onClick={() => setMobileOpen(false)}>Gratis intake</a>
+          </nav>
+        </div>
       )}
     </header>
   );
 }
 
-// Tailwind animatie toevoegen in globals.css:
-// @keyframes slide-in { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: none; } }
-// .animate-slide-in { animation: slide-in 0.25s cubic-bezier(0.4,0,0.2,1); }
+// In globals.css toevoegen:
+// @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+// .animate-fade-in { animation: fade-in 0.25s cubic-bezier(0.4,0,0.2,1); }

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function OverOns() {
   return (
     <div className="bg-background text-textDark min-h-screen flex flex-col">
@@ -10,15 +12,15 @@ export default function OverOns() {
           </section>
           <section>
             <h2 className="text-2xl font-bold mb-4 text-primary">Ervaring</h2>
-            <p>Met ruim 20 jaar ervaring op financieel gebied kunt u rekenen op een hoogwaardige dienstverlening. Vanuit een werkverleden binnen de accountancy kent het inrichten en bijwerken van de financiële administratie geen geheimen. Ook met het rapporteren over cijfers of het opzetten van een goed werkende P&C-cyclus is AOC ervaren. Door een goede afstemming over uw behoefte en het leveren van maatwerk, kunnen de kosten beperkt blijven.</p>
+            <p>Met ruim 20 jaar ervaring op financieel gebied kunt u rekenen op een hoogwaardige dienstverlening. Vanuit een werkverleden binnen de accountancy kent het inrichten en bijwerken van de financiële administratie geen geheimen. Ook met het rapporteren over cijfers of het opzetten van een goed werkende P&amp;C-cyclus is AOC ervaren. Door een goede afstemming over uw behoefte en het leveren van maatwerk, kunnen de kosten beperkt blijven.</p>
           </section>
           <section>
             <h2 className="text-2xl font-bold mb-4 text-primary">Betrouwbaar</h2>
-            <p>Een goede vertrouwensrelatie is belangrijk wanneer het uw financiële gegevens betreft. Advies Over Cijfers gaat vertrouwelijk en zorgvuldig om met uw gegevens, zie het privacy statement voor meer informatie.</p>
+            <p>Een goede vertrouwensrelatie is belangrijk wanneer het uw financiële gegevens betreft. Advies Over Cijfers gaat vertrouwelijk en zorgvuldig om met uw gegevens, zie het <Link href="/privacyverklaring" className="text-action underline">privacy statement</Link> voor meer informatie.</p>
           </section>
           <section>
             <h2 className="text-2xl font-bold mb-4 text-primary">Algemene voorwaarden</h2>
-            <p>De algemene voorwaarden van Advies Over Cijfers zijn te downloaden via deze link.</p>
+            <p>De <Link href="/algemene-voorwaarden" className="text-action underline">algemene voorwaarden</Link> van Advies Over Cijfers zijn te downloaden via deze link.</p>
           </section>
           <section>
             <h2 className="text-2xl font-bold mb-4 text-primary">Eén contactpersoon</h2>

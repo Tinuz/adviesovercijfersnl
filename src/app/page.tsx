@@ -148,13 +148,17 @@ export default function Home() {
             </a>
           </div>
           <div className="flex justify-center">
-            <Image
-              src="/hero.png"
-              alt="USP illustratie"
-              width={320}
-              height={240}
-              className="w-full max-w-xs md:max-w-md"
-            />
+            <div className="relative w-full max-w-xs md:max-w-md aspect-[4/3]">
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[80%] rounded-xl shadow bg-gradient-to-br from-primary/10 to-action/10 blur-[2px] z-0" />
+              <Image
+                src="/hero.png"
+                alt="USP illustratie"
+                width={320}
+                height={240}
+                className="w-full h-auto rounded-2xl relative z-10 shadow"
+                priority
+              />
+            </div>
           </div>
         </div>
       </section>
